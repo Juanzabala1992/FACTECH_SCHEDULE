@@ -46,7 +46,7 @@ public class ScheduleModel {
     @NotNull(message = "Actividades es obligario")
     @Lob
     @Column(columnDefinition = "json", nullable = false)
-    private ActividadesModel actividades;
+    private String actividades;
 
     @NotEmpty
     @NotNull(message = "Fecha inicio es obligaria")
@@ -105,11 +105,11 @@ public class ScheduleModel {
         this.numero_de_documento = numero_de_documento;
     }
 
-    public ActividadesModel getActividades() {
+    public String getActividades() {
         return actividades;
     }
 
-    public void setActividades(ActividadesModel actividades) {
+    public void setActividades(String actividades) {
         this.actividades = actividades;
     }
 
