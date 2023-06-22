@@ -2,6 +2,7 @@ package com.login.authentication.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.login.authentication.exceptions.ApiRequestException;
 import com.login.authentication.exceptions.ApiRequestExceptionValid;
 import com.login.authentication.model.ScheduleModel;
@@ -17,6 +18,8 @@ public class ScheduleService {
 
     @Autowired
     private ScheduleRepository repositorio;
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
     public ResponseEntity<List<ScheduleModel>> getAllData(List<ScheduleModel> lista){
         if(lista.isEmpty() || lista == null) {
@@ -34,11 +37,11 @@ public class ScheduleService {
         }
     }
 
-    public ResponseEntity<Optional<ScheduleModel>> getData(Optional<ScheduleModel> truks){
-        if(truks.isEmpty() || truks == null) {
+    public ResponseEntity<Optional<ScheduleModel>> getData(Optional<ScheduleModel> sch){
+        if(sch.isEmpty() || sch == null) {
             throw new ApiRequestException("No se encuentra el usuario" );
         }else {
-            return ResponseEntity.status(HttpStatus.OK).body(truks);
+            return ResponseEntity.status(HttpStatus.OK).body(sch);
         }
     }
 

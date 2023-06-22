@@ -1,15 +1,19 @@
 package com.login.authentication.service;
 
+import com.login.authentication.exceptions.ApiRequestException;
 import com.login.authentication.model.AuthenticationResponse;
 import com.login.authentication.model.AuthenticatonRequest;
 import com.login.authentication.model.RegisterRequest;
 import com.login.authentication.exceptions.ApiRequestExceptionValid;
 import com.login.authentication.exceptions.EmailValidator;
+import com.login.authentication.model.ScheduleModel;
 import com.login.authentication.user.Rol;
 import com.login.authentication.user.User;
 import com.login.authentication.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -91,6 +96,7 @@ public class AuthenticationService {
                    var jwtToken = jwtService.generateToken(user);
                    return AuthenticationResponse.builder()
                            .token(jwtToken)
+                           .idUser(user.getIdUser())
                            .build();
 
                } else {
@@ -99,4 +105,5 @@ public class AuthenticationService {
            }
 
     }
+
 }

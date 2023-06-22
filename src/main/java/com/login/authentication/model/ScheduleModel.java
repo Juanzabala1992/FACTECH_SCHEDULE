@@ -1,4 +1,5 @@
 package com.login.authentication.model;
+import com.login.authentication.repository.ActividadesModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -43,8 +44,9 @@ public class ScheduleModel {
 
     @NotEmpty
     @NotNull(message = "Actividades es obligario")
-    @Column(nullable = false)
-    private String actividades;
+    @Lob
+    @Column(columnDefinition = "json", nullable = false)
+    private ActividadesModel actividades;
 
     @NotEmpty
     @NotNull(message = "Fecha inicio es obligaria")
@@ -77,6 +79,8 @@ public class ScheduleModel {
     @Column(nullable = false)
     private String responsable_cliente;
 
+    private String observaciones;
+
     public Long getId() {
         return id;
     }
@@ -101,11 +105,11 @@ public class ScheduleModel {
         this.numero_de_documento = numero_de_documento;
     }
 
-    public String getActividades() {
+    public ActividadesModel getActividades() {
         return actividades;
     }
 
-    public void setActividades(String actividades) {
+    public void setActividades(ActividadesModel actividades) {
         this.actividades = actividades;
     }
 
@@ -167,6 +171,14 @@ public class ScheduleModel {
 
     public void setIdUser(String idUser) {
         this.idUser = idUser;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
     public void setResponsable_cliente(String responsable_cliente) {

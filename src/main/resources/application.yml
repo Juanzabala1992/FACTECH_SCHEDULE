@@ -14,6 +14,8 @@ spring:
       database: postgresql
       database-plataform: org.hibernate.dialect.PostgreSQLDialect
 
+    main:
+      allow-bean-definition-overriding: true
 
 server:
   port: 8091
