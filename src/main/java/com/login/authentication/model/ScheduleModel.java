@@ -1,5 +1,4 @@
 package com.login.authentication.model;
-import com.login.authentication.repository.ActividadesModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "schedule")
-public class ScheduleModel {
+public class ScheduleModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,11 +43,8 @@ public class ScheduleModel {
     //@ValidTaskDTO
     private String numero_de_documento;
 
-    @NotEmpty
-    @NotNull(message = "Actividades es obligario")
-    @Lob
-    @Column(columnDefinition = "json", nullable = false)
-    private String actividades;
+    @OneToMany(mappedBy = "scheduleModel")
+    List<ActividadesModel> actividades;
 
     @NotEmpty
     @NotNull(message = "Fecha inicio es obligaria")
@@ -103,14 +101,6 @@ public class ScheduleModel {
 
     public void setNumero_de_documento(String numero_de_documento) {
         this.numero_de_documento = numero_de_documento;
-    }
-
-    public String getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(String actividades) {
-        this.actividades = actividades;
     }
 
     public String getFecha_inicio() {
@@ -179,6 +169,14 @@ public class ScheduleModel {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public List<ActividadesModel> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(List<ActividadesModel> actividades) {
+        this.actividades = actividades;
     }
 
     public void setResponsable_cliente(String responsable_cliente) {
