@@ -33,6 +33,21 @@ public class ActividadesModel{
     @JsonIgnore
     private ScheduleModel scheduleModel;
 
+    @NotEmpty
+    @NotBlank(message = "horas no puede estar vacio")
+    @NotNull
+    private String hours;
+
+    @NotEmpty
+    @NotBlank(message = "Fecha inicial no puede estar vacio")
+    @NotNull
+    private String initial_date;
+
+    @NotEmpty
+    @NotBlank(message = "Fecha final no puede estar vacio")
+    @NotNull
+    private String final_date;
+
     public Long getId() {
         return id;
     }
@@ -55,5 +70,29 @@ public class ActividadesModel{
 
     public void setScheduleModel(ScheduleModel scheduleModel) {
         this.scheduleModel = scheduleModel;
+    }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getInitial_date() {
+        return initial_date;
+    }
+
+    public void setInitial_date(String initial_date) {
+        this.initial_date = initial_date;
+    }
+
+    public String getFinal_date() {
+        return final_date;
+    }
+
+    public void setFinal_date(String final_date) {
+        this.final_date = final_date;
     }
 }

@@ -57,11 +57,6 @@ public class ScheduleModel implements Serializable {
     private String fecha_fin;
 
     @NotEmpty
-    @NotNull(message = "Horas es obligaria")
-    @Column(nullable = false)
-    private String horas_actividad;
-
-    @NotEmpty
     @NotNull(message = "Total horas es obligatorio")
     @Column(nullable = false)
     private String total_horas;
@@ -117,14 +112,6 @@ public class ScheduleModel implements Serializable {
 
     public void setFecha_fin(String fecha_fin) {
         this.fecha_fin = fecha_fin;
-    }
-
-    public String getHoras_actividad() {
-        return horas_actividad;
-    }
-
-    public void setHoras_actividad(String horas_actividad) {
-        this.horas_actividad = horas_actividad;
     }
 
     public String getTotal_horas() {

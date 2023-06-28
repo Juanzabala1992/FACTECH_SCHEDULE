@@ -32,6 +32,12 @@ public class ProfileController {
         return profileService.setData(profile, result);
     }
 
+    @GetMapping("/profile/all")
+    public ResponseEntity <List<Profile>> listAllSchedules(){
+        List<Profile> all = profileRepository.findAll();
+        return profileService.getAllData(all);
+    }
+
     @GetMapping("/profile/{id}")
     public ResponseEntity <Optional<Profile>>  getSchByUser(@PathVariable String id){
         Optional<Profile> profile = profileRepository.findByIdUser(id);

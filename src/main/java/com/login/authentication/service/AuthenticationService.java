@@ -97,6 +97,8 @@ public class AuthenticationService {
                    return AuthenticationResponse.builder()
                            .token(jwtToken)
                            .idUser(user.getIdUser())
+                           .email(user.getUsername())
+                           .role(String.valueOf(user.getRole()))
                            .build();
 
                } else {

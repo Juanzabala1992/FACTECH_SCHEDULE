@@ -21,6 +21,13 @@ public class ProfileService {
     @Autowired
     private ProfileRepository repositorio;
 
+    public ResponseEntity<List<Profile>> getAllData(List<Profile> lista){
+        if(lista.isEmpty() || lista == null) {
+            throw new ApiRequestException("No hay usuarios en la base");
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(lista);
+        }
+    }
 
     public ResponseEntity<Optional<Profile>> getByUserId(Optional<Profile> data){
         if(data.isEmpty() || data == null) {
@@ -39,7 +46,7 @@ public class ProfileService {
             }
 
         }else {
-            String id_profile = profileData.getIdUser();
+            String id_profile = profileData.getEmail();
             Optional<Profile> data = repositorio.findByIdUser(id_profile);
             if(data.isEmpty()) {
                 Profile schRepo = repositorio.save(profileData);

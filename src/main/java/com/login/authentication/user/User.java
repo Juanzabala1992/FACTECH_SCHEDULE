@@ -97,4 +97,12 @@ public class User implements UserDetails {
     public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
+
+    public Rol getRole() {
+        return role;
+    }
+
+    public void setRole(Rol role) {
+        this.role = role;
+    }
 }
