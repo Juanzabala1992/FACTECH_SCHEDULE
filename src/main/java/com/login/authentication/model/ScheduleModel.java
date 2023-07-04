@@ -1,7 +1,5 @@
 package com.login.authentication.model;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +13,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "schedule")
 public class ScheduleModel implements Serializable {
 
@@ -73,101 +73,5 @@ public class ScheduleModel implements Serializable {
     private String responsable_cliente;
 
     private String observaciones;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNumero_de_documento() {
-        return numero_de_documento;
-    }
-
-    public void setNumero_de_documento(String numero_de_documento) {
-        this.numero_de_documento = numero_de_documento;
-    }
-
-    public String getFecha_inicio() {
-        return fecha_inicio;
-    }
-
-    public void setFecha_inicio(String fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
-    }
-
-    public String getFecha_fin() {
-        return fecha_fin;
-    }
-
-    public void setFecha_fin(String fecha_fin) {
-        this.fecha_fin = fecha_fin;
-    }
-
-    public String getTotal_horas() {
-        return total_horas;
-    }
-
-    public void setTotal_horas(String total_horas) {
-        this.total_horas = total_horas;
-    }
-
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getResponsable_cliente() {
-        return responsable_cliente;
-    }
-
-    public String getIdSch() {
-        return idSch;
-    }
-
-    public void setIdSch(String idSch) {
-        this.idSch = idSch;
-    }
-
-    public String getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public List<ActividadesModel> getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(List<ActividadesModel> actividades) {
-        this.actividades = actividades;
-    }
-
-    public void setResponsable_cliente(String responsable_cliente) {
-        this.responsable_cliente = responsable_cliente;
-    }
 }
 

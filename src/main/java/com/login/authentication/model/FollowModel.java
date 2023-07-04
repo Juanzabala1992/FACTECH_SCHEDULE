@@ -1,5 +1,6 @@
 package com.login.authentication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,18 +23,15 @@ public class FollowModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<FollowModel> followModels;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "followId", referencedColumnName = "followId")
+    @JsonIgnore
+    private FollowModelExpand followModel;
 
     @NotEmpty
     @NotBlank(message = "Id no puede estar vacio")
     @NotNull
     private String idUser;
-
-    @NotEmpty
-    @NotBlank(message = "Id Seguimiento no puede estar vacio")
-    @NotNull
-    private String followId;
 
     @NotEmpty
     @NotNull(message = "Nombre es obligario")
@@ -68,16 +66,6 @@ public class FollowModel {
     private String dateContract;
 
     private String contractFinalClient;
-
-    @NotEmpty
-    @NotBlank(message = "Fecha inicial contrato no puede estar vacio")
-    @NotNull
-    private String init_date;
-
-    @NotEmpty
-    @NotBlank(message = "Fecha final contrato no puede estar vacio")
-    @NotNull
-    private String final_date;
 
     @NotEmpty
     @NotBlank(message = "Seguimiento contrato no puede estar vacio")

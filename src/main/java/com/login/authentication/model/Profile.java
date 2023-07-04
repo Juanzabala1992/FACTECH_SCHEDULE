@@ -68,11 +68,11 @@ public class Profile {
     @Column(nullable = false)
     private String cliente;
 
+    private String cliente_final;
+
     private String direccion;
 
     private String telefono;
 
     private String foto;
-
-
 }

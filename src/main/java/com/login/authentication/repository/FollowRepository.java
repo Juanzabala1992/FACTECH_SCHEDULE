@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface FollowRepository extends JpaRepository<FollowModel, String> {
-    Optional<FollowModel> findByFollowId(String id);
+    //Optional<FollowModel> findByFollowId(String id);
 
     Optional<FollowModel> findByIdUser(String id);
 }

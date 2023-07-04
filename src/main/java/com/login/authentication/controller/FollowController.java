@@ -1,8 +1,8 @@
 package com.login.authentication.controller;
 
 
-import com.login.authentication.model.FollowModel;
-import com.login.authentication.model.Profile;
+import com.login.authentication.model.*;
+import com.login.authentication.repository.FollowExpandRepository;
 import com.login.authentication.repository.FollowRepository;
 import com.login.authentication.repository.ProfileRepository;
 import com.login.authentication.service.FollowService;
@@ -27,18 +27,36 @@ public class FollowController {
     private final FollowRepository followRepository;
 
     @Autowired
+    private final FollowExpandRepository followExpandRepository;
+
+    @Autowired
     private final FollowService followService;
 
-
     @PostMapping("/follow/save")
-    public ResponseEntity<List<FollowModel>> saveSchedule(@Valid @RequestBody List<FollowModel> follow, BindingResult result) {
+    public ResponseEntity<FollowModelExpand> saveFollow(@Valid @RequestBody FollowModelExpand follow, BindingResult result) {
         return followService.setData(follow, result);
     }
 
     @GetMapping("/follow/{id}")
-    public ResponseEntity <Optional<FollowModel>>  getSchByUser(@PathVariable String id){
-        Optional<FollowModel> follow = followRepository.findByFollowId(id);
+    public ResponseEntity <Optional<FollowModelExpand>>  getFollow(@PathVariable String id){
+        Optional<FollowModelExpand> follow = followExpandRepository.findByFollowId(id);
         return followService.getByUserId(follow);
+    }
+
+    @GetMapping("/follow/all")
+    public ResponseEntity <List<FollowModelExpand>> listAllSchedules(){
+        List<FollowModelExpand> all = followExpandRepository.findAll();
+        return followService.getAllData(all);
+    }
+
+    @GetMapping("/follow/client/{cliente}")
+    public ResponseEntity <List<ProfileCompanyJoin>>  getFollowInfo(@PathVariable String cliente){
+        return followService.joinTablesByCliente(cliente);
+    }
+
+    @GetMapping("/follow/client/all")
+    public ResponseEntity<List<ProfileCompanyJoin>> joinTablesByAllClients() {
+        return followService.joinTablesByAllClients();
     }
 
 }

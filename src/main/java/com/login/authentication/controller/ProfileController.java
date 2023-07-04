@@ -28,7 +28,8 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @PostMapping("/profile/save")
-    public ResponseEntity<Profile> saveSchedule(@Valid @RequestBody Profile profile, BindingResult result) {
+    public ResponseEntity<Profile> saveSchedule(@Valid @RequestBody Profile profile,
+                                                BindingResult result) {
         return profileService.setData(profile, result);
     }
 
