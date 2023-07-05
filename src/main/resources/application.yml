@@ -17,6 +17,19 @@ spring:
     main:
       allow-bean-definition-overriding: true
 
+    mail:
+      host: smp.gmail.com
+      port: 587
+      username: factech4dm1n@gmail.com
+      password: llqvijrhhhrtqnif
+      properties:
+        mail:
+          smtp:
+            auth: true
+          starttls:
+            enable: true
+
+
 server:
   port: 8091
   address: localhost

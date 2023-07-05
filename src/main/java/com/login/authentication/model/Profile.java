@@ -74,5 +74,6 @@ public class Profile {
 
     private String telefono;
 
+    @Column(length = 200000)
     private String foto;
 }
