@@ -18,7 +18,7 @@ spring:
       allow-bean-definition-overriding: true
 
     mail:
-      host: smp.gmail.com
+      host: smtp.gmail.com
       port: 587
       username: factech4dm1n@gmail.com
       password: llqvijrhhhrtqnif
@@ -26,8 +26,8 @@ spring:
         mail:
           smtp:
             auth: true
-          starttls:
-            enable: true
+            starttls:
+              enable: true
 
 
 server:

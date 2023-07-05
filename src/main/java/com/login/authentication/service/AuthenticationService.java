@@ -34,7 +34,6 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-
     public AuthenticationResponse register(RegisterRequest request, BindingResult result) {
         if(!EmailValidator.validateEmail(request.getEmail())){
             throw new ApiRequestExceptionValid("Formato correo incorrecto");
@@ -62,6 +61,8 @@ public class AuthenticationService {
                             .build();
                     repository.save(user);
                     var jwtToken = jwtService.generateToken(user);
+
+
                     return AuthenticationResponse.builder()
                             .token(jwtToken)
                             .build();
