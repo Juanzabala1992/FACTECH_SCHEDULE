@@ -1,12 +1,9 @@
 package com.login.authentication.service;
 
 import com.login.authentication.exceptions.ApiRequestException;
-import com.login.authentication.model.AuthenticationResponse;
-import com.login.authentication.model.AuthenticatonRequest;
-import com.login.authentication.model.RegisterRequest;
+import com.login.authentication.model.*;
 import com.login.authentication.exceptions.ApiRequestExceptionValid;
 import com.login.authentication.exceptions.EmailValidator;
-import com.login.authentication.model.ScheduleModel;
 import com.login.authentication.user.Rol;
 import com.login.authentication.user.User;
 import com.login.authentication.repository.UserRepository;
@@ -73,7 +70,7 @@ public class AuthenticationService {
         }
 
     }
-       public AuthenticationResponse authenticate(AuthenticatonRequest request, BindingResult result) {
+    public AuthenticationResponse authenticate(AuthenticatonRequest request, BindingResult result) {
             if (result.hasErrors()) {
                if (!result.getFieldError().getDefaultMessage().isEmpty()) {
                    throw new ApiRequestExceptionValid(result.getFieldError().getDefaultMessage());
@@ -107,6 +104,39 @@ public class AuthenticationService {
                }
            }
 
+    }
+
+    public ResponseEntity<String> updatePassword(PasswordModel data, BindingResult result) {
+
+            if (result.hasErrors()) {
+                if (!result.getFieldError().getDefaultMessage().isEmpty()) {
+                    throw new ApiRequestExceptionValid(result.getFieldError().getDefaultMessage());
+                } else {
+                    throw new ApiRequestExceptionValid("Datos no validos");
+                }
+
+            } else {
+                Optional<User> person = repository.findByEmail(data.getEmail());
+
+                if (person.isPresent()){
+
+                    String oldPassword = person.get().getPassword();
+                    String newPassword = data.getNewPassword();
+
+                    boolean passwordsMatch = passwordEncoder.matches(newPassword,oldPassword);
+                    String encodedPassword = passwordEncoder.encode(newPassword);
+
+                    if(passwordsMatch){
+                        throw new ApiRequestExceptionValid("La contraseña es igual a la anterior ");
+                    }else{
+                        person.get().setPassword(encodedPassword);
+                        repository.save(person.get());
+                        return ResponseEntity.ok().body("La contraseña se actualizo correctamente");
+                    }
+                } else {
+                    throw new ApiRequestExceptionValid("Usuario ya existe");
+                }
+            }
     }
 
 }

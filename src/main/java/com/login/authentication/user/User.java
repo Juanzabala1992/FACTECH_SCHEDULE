@@ -105,4 +105,8 @@ public class User implements UserDetails {
     public void setRole(Rol role) {
         this.role = role;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
