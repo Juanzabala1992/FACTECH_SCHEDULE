@@ -1,11 +1,15 @@
 package com.login.authentication.model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -46,15 +50,15 @@ public class ScheduleModel implements Serializable {
     @OneToMany(mappedBy = "scheduleModel")
     List<ActividadesModel> actividades;
 
-    @NotEmpty
-    @NotNull(message = "Fecha inicio es obligaria")
+    @NotNull(message = "Fecha inicial no puede estar vacía")
     @Column(nullable = false)
-    private String fecha_inicio;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate fecha_inicio;
 
-    @NotEmpty
-    @NotNull(message = "Fecha fin es obligaria")
+    @NotNull(message = "Fecha final no puede estar vacía")
     @Column(nullable = false)
-    private String fecha_fin;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate fecha_fin;
 
     @NotEmpty
     @NotNull(message = "Total horas es obligatorio")

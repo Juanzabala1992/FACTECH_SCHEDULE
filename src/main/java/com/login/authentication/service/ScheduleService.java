@@ -1,4 +1,6 @@
 package com.login.authentication.service;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,16 +68,23 @@ public class ScheduleService {
             Optional<ScheduleModel> data = repositorio.findByIdSch(id_sch);
             if(data.isEmpty()) {
 
-                ScheduleModel schRepo = repositorio.save(SheduleData);
+                boolean filter = repositorio.findBetweenDates(SheduleData.getFecha_inicio(),
+                        SheduleData.getFecha_fin(), SheduleData.getIdUser());
+                if(!filter){
+                    ScheduleModel schRepo = repositorio.save(SheduleData);
 
-                List<ActividadesModel> actividades = SheduleData.getActividades();
-                for (ActividadesModel actividad : actividades) {
-                    actividad.setScheduleModel(schRepo);
-                    activitiesRepository.save(actividad);
+
+                    List<ActividadesModel> actividades = SheduleData.getActividades();
+                    for (ActividadesModel actividad : actividades) {
+                        actividad.setScheduleModel(schRepo);
+                        activitiesRepository.save(actividad);
+                    }
+
+
+                    return ResponseEntity.status(HttpStatus.OK).body(SheduleData);
+                }else{
+                    throw new ApiRequestExceptionValid("Ya existe un reporte para estas fechas");
                 }
-
-
-                return ResponseEntity.status(HttpStatus.OK).body(SheduleData);
             }else {
                 throw new ApiRequestExceptionValid("Horario ya existe");
             }
