@@ -48,7 +48,7 @@ public class ProfileService {
             return ResponseEntity.status(HttpStatus.OK).body(data);
         }
     }
-    public ResponseEntity<Profile> setData(Profile profileData, BindingResult result){
+      public ResponseEntity<Profile> setData(Profile profileData, BindingResult result){
         if(result.hasErrors()) {
             if(!result.getFieldError().getDefaultMessage().isEmpty()) {
                 throw new ApiRequestExceptionValid(result.getFieldError().getDefaultMessage());

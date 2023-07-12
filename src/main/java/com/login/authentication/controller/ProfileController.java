@@ -44,5 +44,11 @@ public class ProfileController {
         Optional<Profile> profile = profileRepository.findByIdUser(id);
         return profileService.getByUserId(profile);
     }
+
+    @GetMapping("/profile/email/{id}")
+    public ResponseEntity <Optional<Profile>>  getSchByEmail(@PathVariable String id){
+        Optional<Profile> profile = profileRepository.findByEmail(id);
+        return profileService.getByUserId(profile);
+    }
 }
 
