@@ -50,6 +50,9 @@ public class ScheduleModel implements Serializable {
     @OneToMany(mappedBy = "scheduleModel")
     List<ActividadesModel> actividades;
 
+    @OneToMany(mappedBy = "scheduleModel")
+    List<ActividadesExtrasModel> actividades_extras;
+
     @NotNull(message = "Fecha inicial no puede estar vacía")
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
