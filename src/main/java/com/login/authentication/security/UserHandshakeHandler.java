@@ -30,14 +30,11 @@ public class UserHandshakeHandler extends DefaultHandshakeHandler {
     protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
         MultiValueMap<String, String> queryParams = UriComponentsBuilder.fromUri(request.getURI()).build().getQueryParams();
         String queryParamValue = queryParams.getFirst("user");
-
-        System.out.println("queryParamValue---> 1"+ queryParamValue);
         Optional<Profile> data = profileRepository.findByEmail(queryParamValue);
             if(data.isEmpty() || data== null){
                 throw new ApiRequestException("No hay datos para el usuario");
             }
             else{
-                System.out.println("queryParamValue--->"+ queryParamValue);
                 return new UserPrincipal(queryParamValue);
             }
     }

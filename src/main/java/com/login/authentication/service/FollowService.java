@@ -98,7 +98,9 @@ public class FollowService {
 
         for (Profile profile : profiles) {
             for (CompanyModel company : companies) {
-                joinList.add(new ProfileCompanyJoin(profile, company));
+                if (profile.getCliente().equals(company.getClient())) {
+                    joinList.add(new ProfileCompanyJoin(profile, company));
+                }
             }
         }
 

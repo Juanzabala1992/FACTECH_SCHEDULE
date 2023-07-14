@@ -73,8 +73,13 @@ public class FollowModel {
     private String follow;
 
     @NotEmpty
-    @NotBlank(message = "Punto de atencion contrato no puede estar vacio")
+    @NotBlank(message = "Punto de atencion no puede estar vacio")
     @NotNull
     private String atention;
+
+    @NotEmpty
+    @NotBlank(message = "Resolutor contrato no puede estar vacio")
+    @NotNull
+    private String resolutor;
 
 }

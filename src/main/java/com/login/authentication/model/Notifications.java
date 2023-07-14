@@ -23,7 +23,17 @@ public class Notifications {
   @NotEmpty
   @NotBlank(message = "Id no puede estar vacio")
   @NotNull
+  private String message_id;
+
+  @NotEmpty
+  @NotBlank(message = "Id user no puede estar vacio")
+  @NotNull
   private String idUser;
+
+  @NotEmpty
+  @NotBlank(message = "Id user no puede estar vacio")
+  @NotNull
+  private String email;
 
   @NotEmpty
   @NotNull(message = "Contenido es obligario")
@@ -40,7 +50,6 @@ public class Notifications {
   @Column(nullable = false)
   private String origin;
 
-  @NotEmpty
   @NotNull(message = "Estado es obligario")
   @Column(nullable = false)
   private Boolean state;
